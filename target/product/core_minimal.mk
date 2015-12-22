@@ -87,7 +87,6 @@ PRODUCT_PACKAGES += \
     uiautomator \
     uncrypt \
     voip-common \
-    webview \
     webview_zygote \
 
 # Wifi modules
