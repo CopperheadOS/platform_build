@@ -52,20 +52,24 @@ def CopyInfo(output_zip):
 
 def main(argv):
   bootable_only = [False]
+  compression = [zipfile.ZIP_DEFLATED]
 
   def option_handler(o, _):
     if o in ("-z", "--bootable_zip"):
       bootable_only[0] = True
+    elif o in ("-n", "--no_compression"):
+      compression[0] = zipfile.ZIP_STORED
     else:
       return False
     return True
 
   args = common.ParseOptions(argv, __doc__,
-                             extra_opts="z",
-                             extra_long_opts=["bootable_zip"],
+                             extra_opts="zn",
+                             extra_long_opts=["bootable_zip", "no_compression"],
                              extra_option_handler=option_handler)
 
   bootable_only = bootable_only[0]
+  compression = compression[0]
 
   if len(args) != 2:
     common.Usage(__doc__)
@@ -73,7 +77,7 @@ def main(argv):
 
   OPTIONS.input_tmp, input_zip = common.UnzipTemp(
       args[0], ["IMAGES/*", "OTA/*"])
-  output_zip = zipfile.ZipFile(args[1], "w", compression=zipfile.ZIP_DEFLATED)
+  output_zip = zipfile.ZipFile(args[1], "w", compression)
   CopyInfo(output_zip)
 
   try:
