@@ -304,3 +304,9 @@ ifneq ($(my_sanitize_diag),)
     my_shared_libraries += $($(LOCAL_2ND_ARCH_VAR_PREFIX)UBSAN_RUNTIME_LIBRARY)
   endif
 endif
+
+ifndef LOCAL_IS_HOST_MODULE
+  ifeq ($(my_clang),true)
+    my_cflags += -fsanitize=local-init
+  endif
+endif
