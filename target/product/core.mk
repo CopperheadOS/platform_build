@@ -47,6 +47,7 @@ PRODUCT_PACKAGES += \
     Launcher3 \
     ManagedProvisioning \
     MtpDocumentsProvider \
+    offline-calendar \
     PicoTts \
     PacProcessor \
     libpac \
