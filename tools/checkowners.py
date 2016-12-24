@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 """Parse and check syntax errors of a given OWNERS file."""
 

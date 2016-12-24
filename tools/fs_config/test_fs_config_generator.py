@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Unit test suite for the fs_config_genertor.py tool."""
 
 import tempfile
