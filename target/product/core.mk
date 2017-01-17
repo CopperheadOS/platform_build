@@ -48,6 +48,7 @@ PRODUCT_PACKAGES += \
     ManagedProvisioning \
     MtpDocumentsProvider \
     offline-calendar \
+    PdfViewer \
     PicoTts \
     PacProcessor \
     libpac \
