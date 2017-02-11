@@ -54,6 +54,7 @@ PRODUCT_PACKAGES += \
     libpac \
     PrintSpooler \
     PrintRecommendationService \
+    privacy-friendly-netmonitor \
     ProxyHandler \
     QuickSearchBox \
     Settings \
