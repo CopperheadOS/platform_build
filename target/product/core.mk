@@ -38,6 +38,7 @@ PRODUCT_PACKAGES += \
     ExactCalculator \
     ExternalStorageProvider \
     F-Droid \
+    FDroidPrivilegedExtension \
     FusedLocation \
     InputDevices \
     KeyChain \
