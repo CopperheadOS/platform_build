@@ -9,7 +9,7 @@ ifneq (true,$(WITH_DEXPREOPT))
 else # WITH_DEXPREOPT=true
   ifeq (,$(TARGET_BUILD_APPS)) # TARGET_BUILD_APPS empty
     ifndef LOCAL_DEX_PREOPT # LOCAL_DEX_PREOPT undefined
-      ifneq ($(filter $(TARGET_OUT)/%,$(my_module_path)),) # Installed to system.img.
+      #ifneq ($(filter $(TARGET_OUT)/%,$(my_module_path)),) # Installed to system.img.
         ifeq (,$(LOCAL_APK_LIBRARIES)) # LOCAL_APK_LIBRARIES empty
           # If we have product-specific config for this module?
           ifeq (disable,$(DEXPREOPT.$(TARGET_PRODUCT).$(LOCAL_MODULE).CONFIG))
@@ -20,7 +20,7 @@ else # WITH_DEXPREOPT=true
         else # LOCAL_APK_LIBRARIES not empty
           LOCAL_DEX_PREOPT := nostripping
         endif # LOCAL_APK_LIBRARIES not empty
-      endif # Installed to system.img.
+      #endif # Installed to system.img.
     endif # LOCAL_DEX_PREOPT undefined
   endif # TARGET_BUILD_APPS empty
 endif # WITH_DEXPREOPT=true
