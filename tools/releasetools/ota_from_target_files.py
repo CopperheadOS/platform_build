@@ -130,6 +130,9 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
 
   --payload_signer_args <args>
       Specify the arguments needed for payload signer.
+
+  --serialno <string>
+      Specify a serialno restriction.
 """
 
 from __future__ import print_function
@@ -182,6 +185,7 @@ OPTIONS.payload_signer = None
 OPTIONS.payload_signer_args = []
 OPTIONS.extracted_input = None
 OPTIONS.key_passwords = []
+OPTIONS.serialno = None
 
 METADATA_NAME = 'META-INF/com/android/metadata'
 UNZIP_PATTERN = ['IMAGES/*', 'META/*']
@@ -404,6 +408,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
   assert HasRecoveryPatch(input_zip)
 
   metadata["ota-type"] = "BLOCK"
+  if OPTIONS.serialno is not None:
+      metadata["serialno"] = OPTIONS.serialno
 
   ts = GetBuildProp("ro.build.date.utc", OPTIONS.info_dict)
   ts_text = GetBuildProp("ro.build.date", OPTIONS.info_dict)
@@ -610,6 +616,9 @@ def WriteBlockIncrementalOTAPackage(target_zip, source_zip, output_zip):
                                    OPTIONS.source_info_dict),
       "ota-type": "BLOCK",
   }
+
+  if OPTIONS.serialno is not None:
+      metadata["serialno"] = OPTIONS.serialno
 
   HandleDowngradeMetadata(metadata)
 
@@ -1058,6 +1067,9 @@ def WriteABOTAPackageWithBrilloScript(target_file, output_file,
       "ota-type": "AB",
   }
 
+  if OPTIONS.serialno is not None:
+      metadata["serialno"] = OPTIONS.serialno
+
   if source_file is not None:
     metadata["pre-build"] = CalculateFingerprint(oem_props,
                                                  oem_dicts and oem_dicts[0],
@@ -1323,6 +1335,8 @@ def main(argv):
       OPTIONS.payload_signer_args = shlex.split(a)
     elif o == "--extracted_input_target_files":
       OPTIONS.extracted_input = a
+    elif o == "--serialno":
+      OPTIONS.serialno = a
     else:
       return False
     return True
@@ -1354,6 +1368,7 @@ def main(argv):
                                  "payload_signer=",
                                  "payload_signer_args=",
                                  "extracted_input_target_files=",
+                                 "serialno=",
                              ], extra_option_handler=option_handler)
 
   if len(args) != 2:
