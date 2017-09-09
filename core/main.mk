@@ -209,6 +209,9 @@ ADDITIONAL_BUILD_PROPERTIES += ro.treble.enabled=${PRODUCT_FULL_TREBLE}
 # Show SELinux status in Settings device info
 ADDITIONAL_BUILD_PROPERTIES += ro.build.selinux=1
 
+# Disable OpenGL preloading
+ADDITIONAL_BUILD_PROPERTIES += ro.zygote.disable_gl_preload=1
+
 is_sdk_build :=
 
 ifneq ($(filter sdk win_sdk sdk_addon,$(MAKECMDGOALS)),)
